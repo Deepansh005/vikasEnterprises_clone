@@ -227,4 +227,8 @@ app.get('/api/quotations/:id/pdf', (request, response) => {
 
 const distPath = path.resolve('dist');
 if (fs.existsSync(distPath)) { app.use(express.static(distPath)); app.use((_request, response) => response.sendFile(path.join(distPath, 'index.html'))); }
-app.listen(port, () => console.log(`TradeDesk API listening on http://localhost:${port}`));
+export default app;
+
+if (!process.env.VERCEL) {
+  app.listen(port, () => console.log(`TradeDesk API listening on http://localhost:${port}`));
+}

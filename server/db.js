@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { products } from '../src/data.js';
 
-const databasePath = process.env.DB_PATH || 'data/tradedesk.sqlite';
+const databasePath = process.env.DB_PATH || (process.env.VERCEL ? '/tmp/tradedesk.sqlite' : 'data/tradedesk.sqlite');
 fs.mkdirSync(path.dirname(databasePath), { recursive: true });
 const database = new Database(databasePath);
 database.pragma('foreign_keys = ON');
